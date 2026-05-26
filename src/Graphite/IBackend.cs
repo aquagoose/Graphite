@@ -1,8 +1,6 @@
 namespace Graphite;
 
-public interface IBackend
+public interface IBackend : IBackendBase
 {
     public static abstract string Name { get; }
-
-    public Instance CreateInstance(in InstanceInfo info);
 }

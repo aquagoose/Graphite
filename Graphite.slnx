@@ -1,4 +1,5 @@
 <Solution>
+  <Folder Name="/tests/" />
   <Project Path="src/Graphite.Vulkan/Graphite.Vulkan.csproj" />
   <Project Path="src/Graphite/Graphite.csproj" />
 </Solution>
