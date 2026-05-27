@@ -18,5 +18,9 @@ if (!SDL.Init(SDL.InitFlags.Video | SDL.InitFlags.Events))
 Instance.RegisterBackend<VulkanBackend>();
 Instance instance = Instance.Create(new InstanceInfo("Basic Clear Color"));
 
+Adapter[] adapters = instance.EnumerateAdapters();
+foreach (Adapter adapter in adapters)
+    Console.WriteLine(adapter);
+
 instance.Dispose();
 return 0;

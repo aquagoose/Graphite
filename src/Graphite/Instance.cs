@@ -5,6 +5,20 @@ namespace Graphite;
 
 public abstract class Instance : IDisposable
 {
+    /// <summary>
+    /// Gets if this <see cref="Instance"/> has been disposed.
+    /// </summary>
+    public abstract bool IsDisposed { get; protected set; }
+
+    /// <summary>
+    /// Enumerate the supported <see cref="Adapter"/>s present on the system.
+    /// </summary>
+    /// <returns>An array of supported <see cref="Adapter"/>s.</returns>
+    public abstract Adapter[] EnumerateAdapters();
+    
+    /// <summary>
+    /// Dispose of this <see cref="Instance"/>.
+    /// </summary>
     public abstract void Dispose();
     
     private static List<IBackendBase> _registeredBackends;
