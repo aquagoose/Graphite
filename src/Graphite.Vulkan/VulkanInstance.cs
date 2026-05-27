@@ -16,7 +16,7 @@ internal sealed unsafe class VulkanInstance : Instance
         nint pAppName = SilkMarshal.StringToPtr(info.AppName);
         nint pEngineName = SilkMarshal.StringToPtr("Graphite");
         
-        Instance.Log($"App name: {info.AppName}", DebugMessageSeverity.Info);
+        GLog.LogInfo($"App name: {info.AppName}");
 
         ApplicationInfo appInfo = new()
         {
@@ -38,7 +38,7 @@ internal sealed unsafe class VulkanInstance : Instance
         {
             // mmm heap allocations i love it
             string extensionName = new string((sbyte*) instanceExtensionProperties[i].ExtensionName);
-            Instance.Log(extensionName, DebugMessageSeverity.Info);
+            GLog.LogInfo(extensionName);
 
             switch (extensionName)
             {
@@ -63,7 +63,7 @@ internal sealed unsafe class VulkanInstance : Instance
             PpEnabledExtensionNames = (byte**) pInstanceExtensions
         };
         
-        Instance.Log("Creating instance.");
+        GLog.Log("Creating instance.");
         _vk.CreateInstance(&instanceInfo, null, out _instance).Check("Create instance");
 
         SilkMarshal.Free(pInstanceExtensions);

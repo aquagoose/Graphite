@@ -7,13 +7,14 @@ using Graphite;
 using Graphite.Vulkan;
 using SDL3;
 
+GLog.MessageLogged += (severity, message, line, file) => Console.WriteLine($"[{severity}] {message}"); 
+
 if (!SDL.Init(SDL.InitFlags.Video | SDL.InitFlags.Events))
 {
     Console.WriteLine($"Failed to initialize SDL: {SDL.GetError()}");
     return 1;
 }
 
-Instance.DebugMessage += (severity, message, line, file) => Console.WriteLine($"[{severity}] {message}"); 
 Instance.RegisterBackend<VulkanBackend>();
 Instance instance = Instance.Create(new InstanceInfo("Basic Clear Color"));
 
