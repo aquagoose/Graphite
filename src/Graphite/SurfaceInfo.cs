@@ -3,7 +3,7 @@ namespace Graphite;
 /// <summary>
 /// Info to describe a <see cref="Surface"/>.
 /// </summary>
-public struct SurfaceInfo
+public record struct SurfaceInfo
 {
     /// <summary>
     /// The type of surface.

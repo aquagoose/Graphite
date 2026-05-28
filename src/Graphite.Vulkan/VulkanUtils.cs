@@ -1,4 +1,5 @@
 global using VkInstance = Silk.NET.Vulkan.Instance;
+global using VkDevice = Silk.NET.Vulkan.Device;
 using Silk.NET.Vulkan;
 
 namespace Graphite.Vulkan;

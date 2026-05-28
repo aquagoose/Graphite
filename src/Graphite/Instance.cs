@@ -22,6 +22,18 @@ public abstract class Instance : IDisposable
     /// <param name="info">The <see cref="SurfaceInfo"/> that describes the surface.</param>
     /// <returns>The created <see cref="Surface"/>.</returns>
     public abstract Surface CreateSurface(in SurfaceInfo info);
+
+    /// <summary>
+    /// Create a logical <see cref="Device"/>.
+    /// </summary>
+    /// <param name="surface">The <see cref="Surface"/> to use during device creation.</param>
+    /// <param name="adapter">The <see cref="Adapter"/> to use, if any. If <see langword="null"/> is provided, the first
+    /// suitable adapter will be chosen.</param>
+    /// <returns>The created <see cref="Device"/>.</returns>
+    /// <remarks>The <paramref name="surface"/> does <b>NOT</b> need to be the same surface used to create a
+    /// <see cref="Swapchain"/>. This is only to make device creation in the Vulkan backend easier, and may be removed later.
+    /// </remarks>
+    public abstract Device CreateDevice(Surface surface, Adapter? adapter = null);
     
     /// <summary>
     /// Dispose of this <see cref="Instance"/>.
