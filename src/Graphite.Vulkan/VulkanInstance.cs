@@ -47,6 +47,7 @@ internal sealed unsafe class VulkanInstance : Instance
             switch (extensionName)
             {
                 // TODO: macos/cocoa surface?
+                case KhrSurface.ExtensionName:
                 case KhrWin32Surface.ExtensionName:
                 case KhrWaylandSurface.ExtensionName:
                 case KhrXlibSurface.ExtensionName:
@@ -119,6 +120,11 @@ internal sealed unsafe class VulkanInstance : Instance
 
         // TODO: return IReadOnlyCollection to remove conversion to array?
         return adapters.ToArray();
+    }
+
+    public override Surface CreateSurface(in SurfaceInfo info)
+    {
+        return new VulkanSurface(_vk, _instance, in info);
     }
 
     public override void Dispose()

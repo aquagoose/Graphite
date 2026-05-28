@@ -15,6 +15,13 @@ public abstract class Instance : IDisposable
     /// </summary>
     /// <returns>An array of supported <see cref="Adapter"/>s.</returns>
     public abstract Adapter[] EnumerateAdapters();
+
+    /// <summary>
+    /// Create a <see cref="Surface"/>.
+    /// </summary>
+    /// <param name="info">The <see cref="SurfaceInfo"/> that describes the surface.</param>
+    /// <returns>The created <see cref="Surface"/>.</returns>
+    public abstract Surface CreateSurface(in SurfaceInfo info);
     
     /// <summary>
     /// Dispose of this <see cref="Instance"/>.
