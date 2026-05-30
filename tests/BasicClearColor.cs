@@ -58,6 +58,7 @@ else
 
 Surface surface = instance.CreateSurface(in surfaceInfo);
 Device device = instance.CreateDevice(surface);
+CommandList cl = device.CreateCommandList();
 
 bool alive = true;
 while (alive)
@@ -74,6 +75,7 @@ while (alive)
     }
 }
 
+cl.Dispose();
 device.Dispose();
 surface.Dispose();
 instance.Dispose();

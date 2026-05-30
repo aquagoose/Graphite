@@ -9,6 +9,12 @@ public abstract class Device : IDisposable
     /// Gets if this <see cref="Device"/> has been disposed.
     /// </summary>
     public abstract bool IsDisposed { get; protected set; }
+
+    /// <summary>
+    /// Create a <see cref="CommandList"/>.
+    /// </summary>
+    /// <returns>The created <see cref="CommandList"/>.</returns>
+    public abstract CommandList CreateCommandList();
     
     /// <summary>
     /// Dispose of this <see cref="Device"/>.

@@ -102,8 +102,17 @@ internal sealed unsafe class VulkanDevice : Device
         
         GLog.Log("Creating device.");
         _vk.CreateDevice(_physicalDevice, &deviceInfo, null, out _device).Check("Create device");
+        
+        GLog.Log("Getting device queues.");
+        _vk.GetDeviceQueue(_device, _queues.GraphicsIndex, 0, out _queues.Graphics);
+        _vk.GetDeviceQueue(_device, _queues.PresentIndex, 0, out _queues.Present);
     }
-    
+
+    public override CommandList CreateCommandList()
+    {
+        return new VulkanCommandList(_vk, _device, in _queues);
+    }
+
     public override void Dispose()
     {
         if (IsDisposed)
