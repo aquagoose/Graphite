@@ -73,6 +73,10 @@ while (alive)
                 break;
         }
     }
+    
+    cl.Begin();
+    cl.End();
+    device.ExecuteCommandList(cl);
 }
 
 cl.Dispose();

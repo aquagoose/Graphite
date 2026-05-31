@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Silk.NET.Core;
 using Silk.NET.Core.Native;
 using Silk.NET.Vulkan;
@@ -111,6 +112,26 @@ internal sealed unsafe class VulkanDevice : Device
     public override CommandList CreateCommandList()
     {
         return new VulkanCommandList(_vk, _device, in _queues);
+    }
+
+    public override void ExecuteCommandList(CommandList cl)
+    {
+        VulkanCommandList vulkanCL = (VulkanCommandList) cl;
+        Debug.Assert(vulkanCL.CurrentCommandBuffer.Handle != 0,
+            "Cannot execute: Command list has not had any commands submitted to it!");
+        Debug.Assert(vulkanCL.CurrentFence.Handle != 0, "Cannot execute: Command list has not been ended!");
+
+        CommandBuffer cb = vulkanCL.CurrentCommandBuffer;
+
+        SubmitInfo submitInfo = new()
+        {
+            SType = StructureType.SubmitInfo,
+            CommandBufferCount = 1,
+            PCommandBuffers = &cb
+        };
+
+        _vk.QueueSubmit(_queues.Graphics, 1, &submitInfo, vulkanCL.CurrentFence);
+        vulkanCL.SignalSubmitted();
     }
 
     public override void Dispose()

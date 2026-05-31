@@ -11,6 +11,17 @@ public abstract class CommandList : IDisposable
     public abstract bool IsDisposed { get; protected set; }
 
     /// <summary>
+    /// Begin accepting commands. You <b>MUST</b> call this before executing any commands.
+    /// </summary>
+    public abstract void Begin();
+
+    /// <summary>
+    /// Finish accepting commands and prepare for execution. You <b>MUST</b> call this before submitting for execution.
+    /// </summary>
+    /// <remarks>Once ended, calling <see cref="Begin"/> will reset the command list.</remarks>
+    public abstract void End();
+
+    /// <summary>
     /// Dispose of this <see cref="CommandList"/>.
     /// </summary>
     public abstract void Dispose();
